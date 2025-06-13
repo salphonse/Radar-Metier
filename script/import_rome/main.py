@@ -4,16 +4,18 @@ import pandas as pd
 import os, fnmatch
 from sqlalchemy import create_engine
 
-# Load environment variables 
+# Load environment variables with specific location for EDI (PyCharm/VSCode)
 if not load_dotenv('settings/.env'):
     load_dotenv('script/import_rome/settings/.env')
 
 # Check settings (for debug session only)
-print("Env:", os.getenv("DB_HOST"),
-    os.getenv("DB_PORT"),
-    'crypto_db',
-    os.getenv("DB_USER"),
-    os.getenv("DB_PASSWORD"))
+if __debug__:
+    print('Debug ON')
+    print("Env:", os.getenv("DB_HOST"),
+        os.getenv("DB_PORT"),
+        'crypto_db',
+        os.getenv("DB_USER"),
+        os.getenv("DB_PASSWORD"))
 
 # Database global variables
 db_name = "radarmetier"
@@ -72,21 +74,25 @@ def set_current_file(csv_file):
         global current_file_name
 
         current_file_path = os.path.join(data_path, csv_file)
-        # Remove 'unix_' at start and '_v458_utf8.csv' at the end of file name
-        current_file_name = csv_file.split('unix_', 1)[1].rsplit('_v', 1)[0] # 'unix_domaine_professionnel_v458_utf8.csv'
-        #print("current_file_name:", current_file_name)
+        try:
+            # Remove 'unix_' at beginning and '_v458_utf8.csv' at the end of file name
+            current_file_name = csv_file.split('unix_', 1)[1].rsplit('_v', 1)[0] # 'unix_domaine_professionnel_v458_utf8.csv'
+            #print("current_file_name:", current_file_name)
+        except Exception as e:
+            current_file_name = ''
+            print(e)
 
 
 def extract(src_file):
     try:
-        print("Extract data from file:", src_file)
+        print("Extract UTF8 data from file:", src_file)
         data_frame = pd.read_csv(src_file, encoding='utf-8')
         return data_frame
     except Exception as e:
         print(e)
         try:
-            print("Extract data from file:", src_file)
-            data_frame = pd.read_csv(src_file, encoding='windows-1250')
+            print("Extract ANSI data from file:", src_file)
+            data_frame = pd.read_csv(src_file, encoding='windows-1252')
             print("Récupération des données depuis le fichier terminée!")
             return data_frame
         except Exception as e:
@@ -96,7 +102,7 @@ def extract(src_file):
 
 
 def transform(data_frame):
-    # Concerver les colonnes voulues
+    # Conserver les colonnes voulues
     return data_frame
 
 
@@ -117,7 +123,7 @@ def load(data_frame):
 
     save_csv_file(dest_file, data_frame)
 
-    insert_db_data(current_file_name, data_frame)
+    #insert_db_data(current_file_name, data_frame)
 
 
 def main():
