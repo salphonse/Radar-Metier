@@ -8,21 +8,23 @@ from sqlalchemy import create_engine
 if not load_dotenv('settings/.env'):
     load_dotenv('script/import_rome/settings/.env')
 
-# Check settings (for debug session only)
-if __debug__:
-    print('Debug ON')
-    print("Env:", os.getenv("DB_HOST"),
-        os.getenv("DB_PORT"),
-        'crypto_db',
-        os.getenv("DB_USER"),
-        os.getenv("DB_PASSWORD"))
-
 # Database global variables
-db_name = "radarmetier"
-db_schema = "radarmetier"
+db_schema = 'public' # set to 'public' by default
 db_connection = None
 db_cursor = None
 table_prefix = 'rome_'
+
+# Check settings (for debug session only)
+if __debug__:
+    print('Debug ON')
+    print("Environment data:", 
+        "\nHost:", os.getenv("DB_HOST"),
+        "\nPort:", os.getenv("DB_PORT"),
+        "\nDB name:", os.getenv("DB_NAME"),
+        "\nUser:", os.getenv("DB_USER"),
+        "\nPass:", "******", # os.getenv("DB_PASSWORD"),
+        "\nSchema:", os.getenv("DB_SCHEMA")
+        )
 
 # File global variables
 data_path = "/Users/stephane/Documents/Formation - Data 0325/Projet fil rouge/Data/Code ROME/RefRomeCsv/"
@@ -32,13 +34,26 @@ current_file_path = ""
 def init_db():
     global db_connection
     global db_cursor
+    global db_schema
+
+    if len(os.getenv('DB_SCHEMA')) > 0:
+        db_schema = os.getenv("DB_SCHEMA")
+
+    # Create schema if not exists
+
+    # CREATE SCHEMA IF NOT EXISTS radarmetier;
+    # -- Select default schema
+    # SET search_path TO radarmetier;
+    # -- Set default date format
+    # SET datestyle = 'ISO, DMY';
+
 
     # Connect to an existing database
     try:
         db_connection = psycopg2.connect(
             host=os.getenv("DB_HOST"),
             port=os.getenv("DB_PORT"),
-            database='crypto_db',
+            database=os.getenv("DB_NAME"),
             user=os.getenv("DB_USER"),
             password=os.getenv("DB_PASSWORD"))
 
@@ -57,9 +72,19 @@ def init_db():
     return True # Connection success
 
 def insert_db_data(table_name, data_frame):
-    engine = create_engine(f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{db_name}")
+    global db_schema
+
+    url = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}"
+    if len(os.getenv('DB_PORT')) > 0:
+        url += f":{os.getenv('DB_PORT')}"
+    if len(os.getenv("DB_NAME")) > 0:
+        url += f"/{os.getenv("DB_NAME")}"
+    if __debug__:
+        print("URL=", url)
+        print("DB table:", table_name)
     try:
-        data_frame.to_sql(table_name, engine, if_exists='replace', index=False)
+        engine = create_engine(url)
+        data_frame.to_sql(table_name, engine, schema=db_schema, if_exists='replace', index=False)
         print("Insertion des données dans la DB: ok")
     except Exception as e:
         print(e)
@@ -121,9 +146,9 @@ def load(data_frame):
         else:
             print(error)
 
-    save_csv_file(dest_file, data_frame)
+    #save_csv_file(dest_file, data_frame)
 
-    #insert_db_data(current_file_name, data_frame)
+    insert_db_data(current_file_name, data_frame)
 
 
 def main():

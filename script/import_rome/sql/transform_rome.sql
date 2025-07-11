@@ -44,10 +44,11 @@ UPDATE rome_domaine_professionnel SET code_grand_domaine = LEFT(code_domaine_pro
 ALTER TABLE rome_referentiel_appellation ADD PRIMARY KEY (code_ogr);
 -- Create index on 'code_rome' column
 CREATE INDEX IF NOT EXISTS rome_referentiel_appellation_code_rome_idx ON rome_referentiel_appellation (code_rome);
--- Create index on 'code_domaine_professionnel' column
-CREATE INDEX IF NOT EXISTS rome_referentiel_appellation_code_domaine_professionnel_idx ON rome_referentiel_appellation (code_domaine_professionnel);
+
 -- Add column 'code_domaine_professionnel'
 ALTER TABLE rome_referentiel_appellation ADD COLUMN IF NOT EXISTS code_domaine_professionnel TEXT NULL;
+-- Create index on 'code_domaine_professionnel' column
+CREATE INDEX IF NOT EXISTS rome_referentiel_appellation_code_domaine_professionnel_idx ON rome_referentiel_appellation (code_domaine_professionnel);
 -- Set value for each row
 UPDATE rome_referentiel_appellation SET code_domaine_professionnel = LEFT(code_rome, 3);
 
