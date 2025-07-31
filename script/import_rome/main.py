@@ -168,8 +168,11 @@ def main():
             'rubrique_mobilite',
             'centre_interet',
             'arborescence_centre_interet',
+            'arborescence_competences',
             'referentiel_code_rome',
             'referentiel_competence',
+            'referentiel_savoir',
+            'coherence_item',
             'item',
             'descriptif_rubrique']
 
