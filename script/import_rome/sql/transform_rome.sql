@@ -90,6 +90,10 @@ ALTER TABLE rome_referentiel_competence ADD PRIMARY KEY (code_ogr);
 -- Change 'code_ogr_macro_comp' column type to INT8 to matching with 'rome_referentiel_competence.code_ogr' column
 ALTER TABLE rome_referentiel_competence ALTER COLUMN code_ogr_macro_comp TYPE int8 USING code_ogr_macro_comp::int8;
 
+-- Alter table 'arborescence_competences'
+-- Alter table 'referentiel_savoir'
+-- Alter table 'coherence_item'
+
 
 -- -------------------------------------------------------------------------------------
 -- Add foreign key

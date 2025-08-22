@@ -5,8 +5,8 @@ import os, fnmatch
 from sqlalchemy import create_engine
 
 # Load environment variables with specific location for EDI (PyCharm/VSCode)
-if not load_dotenv('settings/.env'):
-    load_dotenv('script/import_rome/settings/.env')
+if not load_dotenv('../settings/.env'):
+    load_dotenv('script/settings/.env')
 
 # Database global variables
 db_schema = 'public' # set to 'public' by default
@@ -159,7 +159,7 @@ def main():
 
     # Init database connection and cursor
     if init_db():
-
+        # Liste des fichiers à intégrer dans la base de données
         file_list = [
             'grand_domaine',
             'domaine_professionnel',
