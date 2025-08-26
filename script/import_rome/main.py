@@ -5,8 +5,9 @@ import os, fnmatch
 from sqlalchemy import create_engine
 
 # Load environment variables with specific location for EDI (PyCharm/VSCode)
-if not load_dotenv('settings/.env'):
-    load_dotenv('script/import_rome/settings/.env')
+if not load_dotenv('../settings/.env'):
+    print("Load env from alternative from path")
+    load_dotenv('script/settings/.env')
 
 # Database global variables
 db_schema = 'public' # set to 'public' by default
@@ -25,6 +26,7 @@ if __debug__:
         "\nPass:", "******", # os.getenv("DB_PASSWORD"),
         "\nSchema:", os.getenv("DB_SCHEMA")
         )
+exit()
 
 # File global variables
 data_path = "/Users/stephane/Documents/Formation - Data 0325/Projet fil rouge/Data/Code ROME/RefRomeCsv/"
