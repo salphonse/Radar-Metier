@@ -1,0 +1,7 @@
+# Install specific libraries 
+# Amazon S3 connection
+boto3
+# dotenv library
+python-dotenv
+# PostgreSQL connexion
+psycopg2-binary
