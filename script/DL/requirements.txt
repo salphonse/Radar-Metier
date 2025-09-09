@@ -1,0 +1,15 @@
+
+# ---------------------------
+# Prerequisites:
+# ---------------------------
+
+supabase
+python-dotenv
+torch
+pandas
+scikit-learn
+numpy
+matplotlib
+seaborn
+boto3
+gcsfs
