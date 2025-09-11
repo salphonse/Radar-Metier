@@ -3,13 +3,32 @@
 # Prerequisites:
 # ---------------------------
 
-supabase
-python-dotenv
+fastapi
+uvicorn[standard]
 torch
 pandas
-scikit-learn
-numpy
-matplotlib
-seaborn
 boto3
-gcsfs
+python-dotenv
+psycopg2-binary
+joblib
+
+
+# Pour construire l'image, utilisez la commande suivante dans le terminal :
+# docker build -t job-predict-api .
+# Pour lancer le conteneur, utilisez la commande suivante :
+# docker run -d -p 8000:8000 job-predict-api
+
+# python -m venv venv
+# .\venv\Scripts\activate
+# pip freeze > requirements.txt
+# pip install -r requirements.txt
+# pip install fastapi uvicorn scikit-learn pandas joblib
+
+# uvicorn main:app --reload
+
+#GIT
+#git clone https://github.com/Akuma-teck/web_indus_sentiment
+#git add . 
+#git commit -m "Ajout de nouveaux fichiers"
+#git push origin main
+
