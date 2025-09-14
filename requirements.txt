@@ -1,0 +1,40 @@
+alabaster==0.7.16
+babel==2.17.0
+beautifulsoup4==4.13.4
+-e git+https://github.com/boto/boto3.git@14a3347ee40f84cd3a8ebf16d2fff9987b1f5cad#egg=boto3
+-e git+https://github.com/boto/botocore.git@9ade50c660e50df61e3b2f38966095103bd8772b#egg=botocore
+certifi==2025.7.9
+charset-normalizer==3.4.2
+docutils==0.21.2
+furo==2024.8.6
+idna==3.10
+imagesize==1.4.1
+Jinja2==3.1.6
+-e git+https://github.com/boto/jmespath.git@2ad18b0e51ef3c22ef0d4bbeb11506746a39e228#egg=jmespath
+kafka-python-ng==2.2.3
+MarkupSafe==3.0.2
+numpy==2.3.1
+packaging==25.0
+psycopg2==2.9.10
+psycopg2-binary==2.9.10
+py4j==0.10.9.9
+Pygments==2.19.2
+pyspark==4.0.0
+python-dateutil==2.9.0.post0
+requests==2.32.4
+-e git+https://github.com/boto/s3transfer.git@a7e4a61585d6a8cc546237f5f954b7aa188d0bae#egg=s3transfer
+six==1.17.0
+snowballstemmer==3.0.1
+soupsieve==2.7
+Sphinx==7.4.7
+sphinx-basic-ng==1.0.0b2
+sphinx-copybutton==0.5.1
+sphinx-remove-toctrees==0.0.3
+sphinxcontrib-applehelp==2.0.0
+sphinxcontrib-devhelp==2.0.0
+sphinxcontrib-htmlhelp==2.1.0
+sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-qthelp==2.0.0
+sphinxcontrib-serializinghtml==2.0.0
+typing_extensions==4.14.1
+urllib3==2.5.0

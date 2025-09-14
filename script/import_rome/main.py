@@ -26,10 +26,9 @@ if __debug__:
         "\nPass:", "******", # os.getenv("DB_PASSWORD"),
         "\nSchema:", os.getenv("DB_SCHEMA")
         )
-exit()
 
 # File global variables
-data_path = "/Users/stephane/Documents/Formation - Data 0325/Projet fil rouge/Data/Code ROME/RefRomeCsv/"
+data_path = "/Users/stephane/Documents/Formation - Data 0325/Projet fil rouge/Data/Code ROME/RefRomeCsv_V459/"
 current_file_name = ""
 current_file_path = ""
 
