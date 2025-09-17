@@ -6,7 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 import os
 
 # Localiser et recharger le .env
-dotenv_path = find_dotenv("../settings/.env")  # trouve le .env dans ton projet
+dotenv_path = find_dotenv("../script/settings/.env")  # trouve le .env dans ton projet
 load_dotenv(dotenv_path, override=True)  # override=True force le remplacement
 
 bucket_name = "dlhybride"

@@ -1,3 +1,6 @@
+# Test API
+uvicorn main:app --host "0.0.0.0" --port 8000
+
 # Build image
 docker build -t radar_metier_api . 
 
