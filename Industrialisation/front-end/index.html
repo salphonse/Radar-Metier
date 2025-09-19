@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Matrix - Prédicteur de Métier</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="logo glitch">RADAR_METIER</h1>
+            <p class="subtitle">
+                <span class="typing-text">Découvrez votre métier idéal grâce à l'IA</span>
+            </p>
+        </header>
+
+        <div class="main-panel">
+            <h2 class="section-title">&gt; Sélectionnez vos compétences</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="select_domaineCompetence" class="form-label">&gt; Domaine de compétence</label>
+                    <div class="select-wrapper">
+                        <select id="select_domaineCompetence" class="tech-select">
+                            <option value="">Sélectionnez votre domaine</option>
+                        </select>
+                        <div class="select-arrow">▼</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="select_macroCompetence" class="form-label">&gt; Macro-compétence</label>
+                    <div class="select-wrapper">
+                        <select id="select_macroCompetence" class="tech-select">
+                            <option value="">Sélectionnez votre macro-compétence</option>
+                        </select>
+                        <div class="select-arrow">▼</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="select_Competence" class="form-label">&gt; Compétence</label>
+                    <div class="select-wrapper">
+                        <select id="select_Competence" class="tech-select">
+                            <option value="">Sélectionnez votre compétence</option>
+                        </select>
+                        <div class="select-arrow">▼</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="selectedSkills" class="form-label">&gt; cliquez pour ajouter</label>
+                    <div class="select-wrapper">
+                        <button type="button" id="addSkillBtn" class="tech-select">
+                            Ajouter la compétence
+                        </button>
+                    </div>
+                    <div id="selectedSkills" class="skills-container"></div>
+                </div>
+            </div>
+
+            <div class="skills-container">
+                <label class="form-label">&gt; Compétence(s) ajoutée(s)</label>
+                <div class="skills-list" id="skillsGrid">
+                    <!-- Les compétences ajoutées apparaîtront ici -->
+                </div>
+            </div>
+
+            <button class="predict-btn" id="predictBtn" disabled>
+                Initialiser la prédiction
+            </button>
+        </div>
+
+        <div class="result-panel" id="resultPanel">
+            <h3 class="section-title">&gt; Résultat de l'analyse</h3>
+            <div id="resultPanelContent"></div>
+            <p class="form-label" id="resultStatus">
+                Basé sur l'analyse de vos compétences sélectionnées
+            </p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
