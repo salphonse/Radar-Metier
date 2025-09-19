@@ -21,7 +21,8 @@ from model import JobProfileTransformer
 # ---------------------------
 # 1. Variables d'environnement
 # ---------------------------
-load_dotenv('.env')
+if not load_dotenv('.env'):
+    load_dotenv('../../settings/.env')
 S3_ENDPOINT_URL = os.getenv("S3_ENDPOINT_URL")
 S3_ACCESS_KEY_ID = os.getenv("S3_ACCESS_KEY_ID")
 S3_SECRET_ACCESS_KEY = os.getenv("S3_SECRET_ACCESS_KEY")
