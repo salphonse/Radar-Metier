@@ -1,0 +1,1 @@
+# Dans ce dossier se trouve le fichier '.env' qui contient les clés et identifiants nécessaires pour accéder aux données.

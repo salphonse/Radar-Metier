@@ -1,0 +1,1 @@
+# Dans ce dossier se trouve le fichier '.env' qui contient les clés et identifiants de secour (backup) nécessaires pour accéder aux données.
