@@ -20,30 +20,19 @@ from sqlalchemy import create_engine
 
 from model import JobProfileTransformer  # Assurez-vous que model.py est dans le même répertoire
 
+# ===========================
+# 1. Configuration & Globals
+# ===========================
 
+if not load_dotenv(".env"):
+    load_dotenv("../../settings/.env")
 
-# ---------------------------
-# 1. Variables d'environnement
-# ---------------------------
-if not load_dotenv('.env'):
-    load_dotenv('../../settings/.env')
-
+DB_SCHEMA = os.getenv("DB_SCHEMA")
 S3_ENDPOINT_URL = os.getenv("S3_ENDPOINT_URL")
 S3_ACCESS_KEY_ID = os.getenv("S3_ACCESS_KEY_ID")
 S3_SECRET_ACCESS_KEY = os.getenv("S3_SECRET_ACCESS_KEY")
 S3_REGION = os.getenv("S3_REGION")
 S3_BUCKET = "dlhybride"
-
-# ---------------------------
-# 2. Connexion S3
-# ---------------------------
-s3_client = boto3.client(
-    service_name='s3',
-    region_name=S3_REGION,
-    endpoint_url=S3_ENDPOINT_URL,
-    aws_access_key_id=S3_ACCESS_KEY_ID,
-    aws_secret_access_key=S3_SECRET_ACCESS_KEY
-)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
