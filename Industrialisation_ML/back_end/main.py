@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv, find_dotenv
-import os, io, pandas as pd, joblib, boto3
+import os, io, boto3
 from sqlalchemy import create_engine
 from typing import List
 import numpy as np
@@ -126,7 +126,7 @@ app = FastAPI(title="JobProfile ML API", version="1.0")
 
 origins = [
     "http://localhost:5500",
-    "https://radar-metier-zh10.onrender.com/"   # Ajoutez d'autres origines autorisées si nécessaire
+    "https://radar-metier-zh10.onrender.com"   # Ajoutez d'autres origines autorisées si nécessaire
 ]
 
 app.add_middleware(
@@ -245,6 +245,12 @@ def predict(req: SkillsRequest):
 @app.get("/")
 def read_root():
     return {"message": "API opérationnelle"}
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))  # Render fournira automatiquement PORT
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
+
 
 
 
