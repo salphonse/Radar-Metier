@@ -1,5 +1,5 @@
 // Base URL de l'API FastAPI
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://radar-metier.onrender.com";
 
 const resultPanel = document.getElementById('resultPanel');
 

@@ -123,13 +123,21 @@ def load_df_competence():
 # FastAPI App
 # ---------------------------
 app = FastAPI(title="JobProfile ML API", version="1.0")
+
+origins = [
+    "http://localhost:5500",
+    "https://radar-metier-zh10.onrender.com/"   # Ajoutez d'autres origines autorisées si nécessaire
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 
 @app.on_event("startup")
 def startup_event():
