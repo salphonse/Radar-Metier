@@ -1,3 +1,7 @@
+# Requirements:
+# python -m pip install beautifulsoup4
+# python -m pip install supabase
+
 import requests
 from bs4 import BeautifulSoup
 import io
@@ -9,17 +13,17 @@ import os
 load_dotenv()
 
 # === Configuration Supabase ===
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-BUCKET_NAME = "raw-data"
+S3_URL = os.getenv("S3_ENDPOINT_URL")
+S3_KEY = os.getenv("S3_ACCESS_KEY_ID")
+S3_BUCKET_NAME = "raw-data"
 FOLDER = "BMO"
 FOLDER_FAP = "FAP2021_CORRESPOND_ROME"
 
-if not SUPABASE_URL or not SUPABASE_KEY:
+if not S3_URL or not S3_KEY:
     raise ValueError("Les variables SUPABASE_URL ou SUPABASE_KEY ne sont pas définies dans le fichier .env")
 
 # Connexion Supabase
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+supabase: Client = create_client(S3_URL, S3_KEY)
 
 print("démarrage")
 
@@ -43,7 +47,7 @@ for link in soup.find_all("a", href=True):
 # Fonction pour uploader un fichier sur Supabase depuis un contenu en mémoire
 def upload_to_supabase(filename: str, content: bytes):
     try:
-        response = supabase.storage.from_(BUCKET_NAME).upload(
+        response = supabase.storage.from_(S3_BUCKET_NAME).upload(
             f"{FOLDER}/{filename}",
             content,
             {
@@ -109,7 +113,7 @@ if lien:
 # Upload du fichier dans Supabase Storage
     chemin_dans_bucket = f"{FOLDER_FAP}/Dares_FAP2021_Table_passage_ROME.xlsx"
 
-    upload_response = supabase.storage.from_(BUCKET_NAME).upload(
+    upload_response = supabase.storage.from_(S3_BUCKET_NAME).upload(
         chemin_dans_bucket,
         file_excel,
         {"content-type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
