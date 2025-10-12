@@ -18,12 +18,8 @@
 -- item: Définition des compétences
 -- descriptif_rubrique: Liste des rubriques (Savoir-faire, Savoir-être professionnels, Savoirs)
 
--- Create schema
-CREATE SCHEMA IF NOT EXISTS radarmetier;
 -- Select default schema
 SET search_path TO radarmetier;
--- Set default date format
-SET datestyle = 'ISO, DMY';
 
 -- Alter table 'rome_grand_domaine'
 -- Add primary key
