@@ -1,0 +1,6 @@
+# Install specific libraries
+boto3
+python-dotenv
+plotly.express
+ipython
+nbformat
