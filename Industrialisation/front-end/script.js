@@ -2,7 +2,7 @@
 // Config
 // =============================
 //const API_BASE = "http://127.0.0.1:8000";
-const apiUrl = "https://job-predict.onrender.com";
+const apiUrl = "https://radar-metier-zz14.onrender.com";
 
 
 let selectedSkillsCodes = [];
