@@ -1,7 +1,13 @@
-# Pour lancer l'application, utilisez la commande suivante dans le terminal :
-# uvicorn main:app --reload
-# L'API sera disponible sur http://127.0.0.1:8000
-# Documentation interactive : http://127.0.0.1:8000/docs
+"""
+JobProfile API
+--------------
+
+Pour lancer l'application :
+    uvicorn main:app --reload
+
+Documentation :
+    http://127.0.0.1:8000/docs
+"""
 
 import io
 import os
@@ -24,10 +30,11 @@ from model import JobProfileTransformer  # Assurez-vous que model.py est dans le
 # 1. Configuration & Globals
 # ===========================
 
-if not load_dotenv(".env"):
-    load_dotenv("../../settings/.env")
+BUCKET_NAME = "dlhybride"
+DB_SCHEMA = "radarmetier"
 
-DB_SCHEMA = os.getenv("DB_SCHEMA")
+load_dotenv(".env")
+
 S3_ENDPOINT_URL = os.getenv("S3_ENDPOINT_URL")
 S3_ACCESS_KEY_ID = os.getenv("S3_ACCESS_KEY_ID")
 S3_SECRET_ACCESS_KEY = os.getenv("S3_SECRET_ACCESS_KEY")
@@ -161,6 +168,7 @@ def load_df_competence():
 
     df_competence = pd.DataFrame(df_from_query(query))
     print(f"df_competence chargé: {df_competence.shape}")
+    #df_competence.to_csv("competences.csv", index=False, encoding="utf-8")
 
 
 # ===========================
@@ -225,17 +233,141 @@ def get_macro_competence(competence: Competence):
 def get_competence(competence: Competence):
     global df_competence
     if df_competence.empty:
-        return {"status": "error", "message": "Les données n'ont pas été initialisées. Faites d'abord /init."}
-    df_comp = df_competence.loc[df_competence['libelle_macro_competence'] == competence.macro_competence][['code_ogr_competence', 'libelle_competence']].drop_duplicates().sort_values('libelle_competence')
+        return {
+            "status": "error",
+            "message": "Les données n'ont pas été initialisées. Faites d'abord /init."
+        }
+    # Filtrer sur la macro compétence demandée
+    df_comp = (
+        df_competence.loc[
+            df_competence['libelle_macro_competence'] == competence.macro_competence,
+            [
+                'code_ogr_competence',
+                'libelle_competence',
+                'code_rome',
+                'libelle_rome'
+            ]
+        ]
+        .drop_duplicates(subset=["code_ogr_competence", "libelle_competence"])
+        .sort_values('libelle_competence')
+    )
+
     df_comp['code_ogr_competence'] = df_comp['code_ogr_competence'].astype(int)
-    df_comp = df_comp.rename(columns={'code_ogr_competence': 'code', 'libelle_competence':'libelle'})
+    # Renommer pour un JSON plus propre
+    df_comp = df_comp.rename(columns={
+        'code_ogr_competence': 'code',
+        'libelle_competence': 'libelle',
+        'coh.code_rome': 'code_rome',
+        'ref.libelle_rome': 'libelle_rome'
+    })
+
     print(f"Nb competence: {df_comp.shape}")
+
     if df_comp.empty:
-        return {"status": "error", "message": f"Aucune compétence pour {competence.macro_competence}"}
-    return { "status": "success", 
-        "liste_competence": df_comp[['code', 'libelle']].to_dict(orient='records')
+        return {
+            "status": "error",
+            "message": f"Aucune compétence pour {competence.macro_competence}"
         }
 
+    return {
+        "status": "success",
+        "liste_competence": df_comp[['code', 'libelle', 'code_rome', 'libelle_rome']].to_dict(orient='records')
+    }
+
+@app.get("/get_all_competences")
+def get_all_competences():
+    global df_competence
+    if df_competence.empty:
+        return {
+            "status": "error",
+            "message": "Les données n'ont pas été initialisées. Faites d'abord /init."
+        }
+
+    df_comp = (
+        df_competence[['code_ogr_competence', 'libelle_competence', 'code_rome', 'libelle_rome']]
+        .drop_duplicates(subset=["code_ogr_competence", "libelle_competence"])
+        .sort_values('libelle_competence')
+    )
+
+    df_comp['code_ogr_competence'] = df_comp['code_ogr_competence'].astype(int)
+
+    df_comp = df_comp.rename(columns={
+        'code_ogr_competence': 'code',
+        'libelle_competence': 'libelle',
+        'code_rome': 'code_rome',
+        'libelle_rome': 'libelle_rome'
+    })
+
+    return {
+        "status": "success",
+        "liste_competence": df_comp[['code', 'libelle', 'code_rome', 'libelle_rome']].to_dict(orient='records')
+    }
+
+@app.post("/get_rome_actuel_list")
+def get_rome_actuel_list():
+    """
+    Retourne la liste des codes ROME actuels (avec libellés),
+    classés par ordre alphabétique de code_rome.
+    """
+    global df_competence
+    if df_competence.empty:
+        load_df_competence()
+
+    df_rome_actuel = (
+        df_competence[['code_rome', 'libelle_rome']]
+        .drop_duplicates()
+        .sort_values('code_rome')   # Tri alphabétique
+    )
+
+    return {
+        "status": "success",
+        "liste_rome_actuel": df_rome_actuel.to_dict(orient="records")
+    }
+print("ok")
+
+@app.post("/get_rome_cible_list")
+def get_rome_cible_list():
+    """
+    Retourne la liste des codes ROME ciblés (avec libellés),
+    classés par ordre alphabétique de code_rome.
+    Si besoin d'une autre logique pour distinguer “ciblé”,
+       tu peux filtrer ici selon ta table ou ton mapping.
+    """
+    global df_competence
+    if df_competence.empty:
+        load_df_competence()
+
+    df_rome_cible = (
+        df_competence[['code_rome', 'libelle_rome']]
+        .drop_duplicates()
+        .sort_values('code_rome')   # Tri alphabétique
+    )
+
+    return {
+        "status": "success",
+        "liste_rome_cible": df_rome_cible.to_dict(orient="records")
+    }
+print("ok")
+
+from fastapi import Query
+@app.post("/get_competences_by_rome")
+def get_competences_by_rome(code_rome: str = Query(..., description="Code ROME actuel")):
+    """
+    Retourne la liste des compétences correspondant au code ROME actuel.
+    """
+    global df_competence
+    if df_competence.empty:
+        load_df_competence()
+
+    df_comp = df_competence[df_competence["code_rome"] == code_rome][
+        ["code_ogr_competence", "libelle_competence"]
+    ].drop_duplicates()
+
+    return {
+        "status": "success",
+        "competences": df_comp.to_dict(orient="records")
+    }
+print("ok")
 # ===========================
 # 9. Fonction de prédiction
 # ===========================

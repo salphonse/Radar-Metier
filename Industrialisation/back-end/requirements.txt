@@ -2,6 +2,7 @@
 # ---------------------------
 # Prerequisites:
 # ---------------------------
+
 fastapi
 uvicorn
 pydantic
@@ -11,4 +12,13 @@ boto3
 pandas
 python-dotenv
 dill
-scikit-learn
+sqlalchemy
+psycopg2-binary
+pdfkit
+getstream
+
+
+
+
+
+
