@@ -1,0 +1,24 @@
+
+# ---------------------------
+# Prerequisites:
+# ---------------------------
+
+fastapi
+uvicorn
+pydantic
+torch
+joblib
+boto3
+pandas
+python-dotenv
+dill
+sqlalchemy
+psycopg2-binary
+pdfkit
+getstream
+
+
+
+
+
+

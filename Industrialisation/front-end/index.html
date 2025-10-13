@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar-Métier - Prédicteur de Métier</title>
+    <link rel="icon" type="image/png" href="/favicon.png?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <img src="/logo.png" alt="Logo Radar Métier" class="logo-img">
+             <div class="text-content">
+                <h1 class="logo glitch">RADAR_MÉTIER</h1>
+                <div class="separator"></div>
+                <p class="subtitle">
+                    <span class="typing-text">Découvrez votre métier idéal grâce à l'IA</span>
+                </p>
+            </div>
+        </header>
+    </div>
+
+        <div class="main-panel">
+            <h2 class="section-title">Sélectionnez votre métier actuel</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+                <div class="autocomplete-container">
+                    <input type="text" id="searchRomeInput" placeholder="Rechercher un métier..." autocomplete="off" />
+                    <div id="autocompleteList" class="autocomplete-list"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="romeLetterFilterActuel" class="form-label"></label>
+                    <div class="select-wrapper">
+                        <select id="romeLetterFilterActuel" class="tech-select">
+                                <option value="">Sélectionnez votre grand domaine</option>
+                                    <option value="A">A - Agriculture et Pêche, Espaces naturels et Espaces verts, Soins aux animaux</option>
+                                    <option value="B">B - Arts et Façonnage d'ouvrages d'art</option>
+                                    <option value="C">C - Banque, Assurance, Immobilier</option>
+                                    <option value="D">D - Commerce, Vente et Grande distribution</option>
+                                    <option value="E">E - Communication, Média et Multimédia</option>
+                                    <option value="F">F - Construction, Bâtiment et Travaux publics</option>
+                                    <option value="G">G - Hôtellerie-Restauration, Tourisme, Loisirs et Animation</option>
+                                    <option value="H">H - Industrie</option>
+                                    <option value="I">I - Installation et Maintenance</option>
+                                    <option value="J">J - Santé</option>
+                                    <option value="K">K - Services à la personne et à la collectivité</option>
+                                    <option value="L">L - Spectacle</option>
+                                    <option value="M">M - Support à l'entreprise</option>
+                                    <option value="N">N - Transport et logistique</option>
+                            </select>
+                        
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="select_code_rome_actuel" class="form-label"></label>
+                        <div class="select-wrapper">
+                            <select id="select_code_rome_actuel" class="tech-select">
+                                <option value="">Sélectionnez votre code rome actuel</option>
+                            </select>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="main-panel">
+            <h2 class="section-title">Sélectionnez vos compétences</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+                <div class="autocomplete-container">
+                <input type="text" id="searchSkillInput" placeholder="Rechercher une compétence...">
+                <div id="autocompleteSkillList" class="autocomplete-list"></div>
+                
+                </div>
+                <div class="form-group">
+                    <label for="select_domaineCompetence" class="form-label"></label>
+                    <div class="select-wrapper">
+                        <select id="select_domaineCompetence" class="tech-select">
+                            <option value="">Sélectionnez votre domaine</option>
+                        </select>
+                       
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="select_macroCompetence" class="form-label"></label>
+                    <div class="select-wrapper">
+                        <select id="select_macroCompetence" class="tech-select">
+                            <option value="">Sélectionnez votre macro-compétence</option>
+                        </select>
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="select_Competence" class="form-label"></label>
+                    <div class="select-wrapper">
+                        <select id="select_Competence" class="tech-select">
+                            <option value="">Sélectionnez votre compétence</option>
+                        </select>
+                        
+                    </div>
+                </div>
+
+                <button type="button" id="addSkillBtn" class="add-skill-btn">
+                    Ajouter la compétence
+                </button>
+            </div>
+
+            <div class="main-panel">
+                <h2 class="section-title">Compétence(s) ajoutée(s)</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="skills-container">
+                    <label class="form-label"></label>
+                    <div class="skills-list" id="skillsGrid">
+                    </div>
+                </div>
+            </div>
+        <div class="main-panel">
+            <h2 class="section-title">Sélectionnez votre métier ciblé</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+                <div class="autocomplete-container">
+                    <input type="text" id="searchRomeInputCible" placeholder="Rechercher un métier..." autocomplete="off" />
+                    <div id="autocompleteListCible" class="autocomplete-list"></div>
+                </div>
+
+            <div class="form-group">
+                <label for="romeLetterFilterCible" class="form-label"></label>
+                <div class="select-wrapper">
+                    <select id="romeLetterFilterCible" class="tech-select">
+                            <option value="">Sélectionner votre grand domaine</option>
+                                <option value="A">A - Agriculture et Pêche, Espaces naturels et Espaces verts, Soins aux animaux</option>
+                                <option value="B">B - Arts et Façonnage d'ouvrages d'art</option>
+                                <option value="C">C - Banque, Assurance, Immobilier</option>
+                                <option value="D">D - Commerce, Vente et Grande distribution</option>
+                                <option value="E">E - Communication, Média et Multimédia</option>
+                                <option value="F">F - Construction, Bâtiment et Travaux publics</option>
+                                <option value="G">G - Hôtellerie-Restauration, Tourisme, Loisirs et Animation</option>
+                                <option value="H">H - Industrie</option>
+                                <option value="I">I - Installation et Maintenance</option>
+                                <option value="J">J - Santé</option>
+                                <option value="K">K - Services à la personne et à la collectivité</option>
+                                <option value="L">L - Spectacle</option>
+                                <option value="M">M - Support à l'entreprise</option>
+                                <option value="N">N - Transport et logistique</option>
+                        </select>
+                </div>
+            </div>
+                <div class="form-group">
+                    <label for="select_code_rome_ciblé" class="form-label"></label>
+                    <div class="select-wrapper">
+                        <select id="select_code_rome_ciblé" class="tech-select">
+                            <option value="">Sélectionnez votre code rome ciblé</option>
+                        </select>
+                        
+                    </div>
+                </div> 
+            </div>
+            <button class="predict-btn" id="predictBtn" disabled>
+                Initialiser la prédiction
+            </button>
+            <div class="result-panel" id="resultPanel">
+                <h3 class="section-title">Résultat de l'analyse</h3>
+                <div id="resultPanelContent"></div>
+                <p class="form-label" id="resultStatus">
+                </p>
+            </div>
+            <div class="result-panel">
+                <h3 class="section-title">Formations liées au métier ciblé</h3>
+                <div id="rncpResults"></div>
+            </div>
+
+            <div class="result-panel" id="resultPanel">
+                <h3 class="section-title">Télécharger le résultat en PDF</h3>
+
+                <div id="resultPanelContent2"></div>
+                <button id="sendBtn" class="send-btn">Télécharger</button>
+                </div>
+            </div>
+        </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+
+</body>
+</html>
