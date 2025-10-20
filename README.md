@@ -80,12 +80,16 @@ Suivez les instructions du README pour initialiser la base de ddonnées et impor
 ### 🤖 Modèle de Machine Learning
 Pour accéder au dépot de l'industrialisation du modèle ML:
 
-API : [https://github.com/salphonse/Radar-Metier-ML/tree/Back-end](https://github.com/salphonse/Radar-Metier-ML/tree/Back-end)  
-Front : [https://github.com/salphonse/Radar-Metier-ML/tree/Front-end](https://github.com/salphonse/Radar-Metier-ML/tree/Front-end)  
+Repository API : [https://github.com/salphonse/Radar-Metier-ML/tree/Back-end](https://github.com/salphonse/Radar-Metier-ML/tree/Back-end)  
+Documentation de l'API : [https://radar-metier.onrender.com/docs](https://radar-metier.onrender.com/docs)
+
+Repository Front : [https://github.com/salphonse/Radar-Metier-ML/tree/Front-end](https://github.com/salphonse/Radar-Metier-ML/tree/Front-end)  
+Site : [https://radar-metier-zh10.onrender.com/](https://radar-metier-zh10.onrender.com/)
 
 ### 🤖 Modèle de Deep Learning
 Pour accéder au dépot de l'industrialisation du modèle DL:
 
-API : [https://github.com/salphonse/Radar-Metier/tree/main/Industrialisation/back-end](https://github.com/salphonse/Radar-Metier/tree/main/Industrialisation/back-end)  
-Front : [https://github.com/salphonse/Radar-Metier/tree/main/Industrialisation/front-end](https://github.com/salphonse/Radar-Metier/tree/main/Industrialisation/front-end)  
+Repository API : [https://github.com/salphonse/Radar-Metier/tree/main/Industrialisation/back-end](https://github.com/salphonse/Radar-Metier/tree/main/Industrialisation/back-end)  
 
+Repository Front : [https://github.com/salphonse/Radar-Metier/tree/main/Industrialisation/front-end](https://github.com/salphonse/Radar-Metier/tree/main/Industrialisation/front-end)  
+Site : [https://radar-metier-4vcx.onrender.com/](https://radar-metier-4vcx.onrender.com/)
