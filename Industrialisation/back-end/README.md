@@ -11,7 +11,7 @@
 > uvicorn main:app --reload
 
 ## Exemple de commandes utilisées avec GitHub:
-> git clone https://github.com/Akuma-teck/Job-predict
+> git clone https://github.com/salphonse/Radar-Metier
 > git add . 
 > git commit -m "Ajout de nouveaux fichiers"
 > git push origin main
