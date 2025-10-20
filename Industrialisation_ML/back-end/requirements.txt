@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pydantic
+joblib
+torch
+pandas
+numpy
+scipy
+scikit-learn
+sqlalchemy
+psycopg2-binary
+boto3
+python-dotenv
+dill
